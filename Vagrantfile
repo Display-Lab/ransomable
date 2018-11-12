@@ -25,5 +25,9 @@ Vagrant.configure("2") do |config|
     ansible.groups = {
       "reports" => ["default"]
     }
+    ansible.extra_vars = {
+      apt_key_server: 'hkps://keyserver.ubuntu.com:443',
+      apt_key_id: '51716619E084DAB9'
+    }
   end
 end
