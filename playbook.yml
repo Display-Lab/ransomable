@@ -1,6 +1,8 @@
 ---
 - hosts: all
   become: true
+  tags:
+    - core
   remote_user: ubuntu
   gather_facts: no
   pre_tasks:
@@ -11,6 +13,8 @@
 
 - hosts: all
   become: true
+  tags:
+    - core
   remote_user: ubuntu
   gather_facts: yes
   tasks:
@@ -51,6 +55,9 @@
 
 - hosts: reports
   become: true
+  tags:
+    - R
+    - apt
   tasks:
     - name: Install a list of packages
       apt:
@@ -64,11 +71,14 @@
         - git
 
 - hosts: reports
-  roles:
-    - role: andrewrothstein.r
+  become: true
+  tags:
+    - R
+  tasks:
+    - include_role:
+        name: andrewrothstein.r
       vars:
-        cran_apt_repo: 'deb https://cloud.r-project.org/bin/linux/ubuntu'
-        codename: 'bionic-cran35'
+        cran_apt_repo: 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
         r_pkgs:
           - dplyr
           - ggplot2
@@ -92,6 +102,8 @@
 
 - hosts: reports
   become: yes
+  tags:
+    - R
   tasks:
     - name: Create rusers group
       group:
@@ -104,6 +116,9 @@
         append: yes
 
 - hosts: reports
+  tags:
+    - ruby
+    - apt
   gather_facts: true # https://github.com/zzet/ansible-rbenv-role/issues/37
   vars:
     rbenv:
