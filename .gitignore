@@ -2,3 +2,5 @@ roles/
 .vagrant/
 *.log
 *.retry
+
+inventory/hosts.yml

@@ -1,0 +1,9 @@
+---
+reports:
+  hosts:
+    reportsVM:
+      ansible_host: 'IP-or-domain-of-your-host'
+      ansible_port: 22
+      ansible_user: ubuntu
+  vars:
+    foo: bar
