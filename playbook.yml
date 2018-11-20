@@ -82,6 +82,8 @@
         r_pkgs:
           - bookdown
           - dplyr
+          - DT
+          - htmltools
           - ggplot2
           - ggthemes
           - rmarkdown
@@ -100,6 +102,7 @@
           - glue
           - gridExtra
           - stats
+          - tidyverse
 
 - hosts: reports
   become: yes
