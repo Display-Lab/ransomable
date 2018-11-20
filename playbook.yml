@@ -80,6 +80,7 @@
       vars:
         cran_apt_repo: 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
         r_pkgs:
+          - bookdown
           - dplyr
           - ggplot2
           - ggthemes
@@ -114,6 +115,23 @@
         name: ubuntu
         groups: rusers
         append: yes
+
+- hosts: reports
+  become: yes
+  tags:
+    - R
+  tasks: 
+    - name: R lib permissions
+      file:
+        path: "{{ item }}"
+        group: rusers
+        mode: "2775"
+        recurse: yes
+        state: directory
+      with_items:
+        - "/usr/local/lib/R/site-library"
+        - "/usr/lib/R/site-library"
+        - "/usr/lib/R/library"
 
 - hosts: reports
   tags:
