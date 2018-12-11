@@ -27,7 +27,7 @@
       apt:
         name: aptitude
         state: present
-    - name: Upgrade all packages to the latest version
+    - name: Upgrade all system packages to the latest version
       apt:
         name: "*"
         state: latest
@@ -59,7 +59,7 @@
     - R
     - apt
   tasks:
-    - name: Install a list of packages
+    - name: Install a list of system packages
       apt:
         name: "{{ packages }}"
       vars:
@@ -69,6 +69,7 @@
         - libcurl4
         - libcurl4-openssl-dev
         - git
+        - mysql-client
 
 - hosts: reports
   become: true
