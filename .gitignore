@@ -1,4 +1,6 @@
 roles/
+!roles/simpl.setup/*
+
 .vagrant/
 *.log
 *.retry
