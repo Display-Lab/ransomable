@@ -1,3 +1,6 @@
 ---
 - src: zzet.rbenv
 - src: andrewrothstein.r
+# cup-bearer (data retrieval timer) install from git source
+- src: git+https://git.procedurallearning.org/scm/~cgross/cup-bearer.git
+  name: data.retrieval
