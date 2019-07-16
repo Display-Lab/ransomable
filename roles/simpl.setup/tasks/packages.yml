@@ -1,0 +1,12 @@
+---
+- name: Install a list of system packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - pandoc
+    - curl
+    - libcurl4
+    - libcurl4-openssl-dev
+    - git
+    - mysql-client
