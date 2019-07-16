@@ -77,33 +77,32 @@
     - R
   tasks:
     - include_role:
-        name: andrewrothstein.r
+        name: oefenweb.r
       vars:
-        cran_apt_repo: 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
-        r_pkgs:
-          - bookdown
-          - dplyr
-          - DT
-          - htmltools
-          - ggplot2
-          - ggthemes
-          - rmarkdown
-          - scales
-          - stringr
-          - tinytex
-          - tools
-          - utils
-          - viridis
-          - purrr
-          - tidyr
-          - knitr
-          - lubridate
-          - RColorBrewer
-          - forcats
-          - glue
-          - gridExtra
-          - stats
-          - tidyverse
+        r_install_dev: true
+        r_install:
+          - r-recommended
+        r_packages:
+          - name: bookdown
+          - name: dplyr
+          - name: DT
+          - name: htmltools
+          - name: ggplot2
+          - name: ggthemes
+          - name: rmarkdown
+          - name: scales
+          - name: stringr
+          - name: tinytex
+          - name: viridis
+          - name: purrr
+          - name: tidyr
+          - name: knitr
+          - name: lubridate
+          - name: RColorBrewer
+          - name: forcats
+          - name: glue
+          - name: gridExtra
+          - name: tidyverse
 
 - hosts: reports
   become: yes
@@ -158,3 +157,11 @@
     - role: zzet.rbenv
       rbenv_users:
         - ubuntu
+
+#- hosts: reports
+#  become: yes
+#  tags:
+#    - systemd
+#    - timer
+#  roles:
+#    - role: data.retrieval
