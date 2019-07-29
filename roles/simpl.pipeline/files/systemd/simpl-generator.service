@@ -1,0 +1,20 @@
+[Unit]
+Description=SIMPL report generator
+PartOf=simple-pipeline.service
+After=simpl-pipeline.service
+After=simpl-retriever.service
+Requires=simpl-retriever.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'echo "Report Generator Done."'
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=simpl-generator
+
+#RemainAfterExit=true
+
+[Install]
+# Start when pipeline starts
+WantedBy=simpl-pipeline.service

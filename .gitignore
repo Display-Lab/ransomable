@@ -3,6 +3,8 @@ roles/**
 !/roles/simpl.dependencies/**
 !/roles/simpl.install
 !/roles/simpl.install/**
+!/roles/simpl.pipeline
+!/roles/simpl.pipeline/**
 
 .vagrant/
 *.log

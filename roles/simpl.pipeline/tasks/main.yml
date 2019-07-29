@@ -1,0 +1,25 @@
+---
+- name: Install systemd unit (service & timer) files
+  copy: 
+    src: files/systemd/
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+
+- name: Enable units and reload
+  systemd:
+    daemon_reload: yes
+    name: "{{ item }}"
+    enabled: yes
+  loop:
+    - simpl-emailer.service
+    - simpl-generator.service
+    - simpl-retriever.service
+    - simpl-pipeline.service
+    - simpl-pipeline.timer
+
+- name: Start timer
+  systemd:
+    name: simpl-pipeline.timer
+    state: started
+    enabled: yes

@@ -1,0 +1,21 @@
+[Unit]
+Description=SIMPL emailer
+PartOf=simple-pipeline.service
+After=simpl-pipeline.service
+After=simpl-generator.service
+Requires=simpl-generator.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'echo "Emailer Done."'
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=simpl-emailer
+
+#RemainAfterExit=true
+
+[Install]
+# Start when pipeline starts
+WantedBy=simpl-pipeline.service
+

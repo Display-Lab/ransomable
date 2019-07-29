@@ -1,0 +1,9 @@
+[Unit]
+Description=SIMPL pipeline timer
+
+[Timer]
+OnCalendar=*-*-* *:0/2
+Persistent=true
+
+[Install]
+WantedBy=timers.target
