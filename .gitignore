@@ -1,6 +1,6 @@
 roles/**
-!/roles/simpl.setup
-!/roles/simpl.setup/**
+!/roles/simpl.dependencies
+!/roles/simpl.dependencies/**
 !/roles/simpl.install
 !/roles/simpl.install/**
 
