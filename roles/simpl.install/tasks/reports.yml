@@ -1,0 +1,28 @@
+---
+- name: Check R is present
+  command: /usr/bin/env Rscript --version
+  args:
+    warn: no
+  register: r_check
+  ignore_errors: yes
+
+- name: Check R presence failure message
+  fail:
+    msg: "R NEEDS TO BE INSTALLED."
+  when: "r_check.rc != 0"
+
+- name: Create data directory
+  file:
+    state: directory
+    path: /var/simpl/reports
+    mode: "u=rwx,g=rx,o=rx"
+    owner: ubuntu
+    group: ubuntu
+
+- name: Install report generator from bitbucket
+  git:
+    clone: yes
+    force: yes
+    depth: 1
+    repo: "https://git.procedurallearning.org/scm/sim/simplreports.git"
+    dest: /opt/simpl/reports

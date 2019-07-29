@@ -1,0 +1,40 @@
+---
+- name: Check mysql is present
+  command: /usr/bin/dpkg-query -l mysql-client
+  args:
+    warn: no
+  register: mysql_check
+  ignore_errors: yes
+
+- name: Check mysql presence failure message
+  fail:
+    msg: "MYSQL-CLIENT NEEDS TO BE INSTALLED."
+  when: "mysql_check.rc != 0"
+
+- name: Create data directory
+  file:
+    state: directory
+    path: /var/simpl/data_retriever
+    mode: "u=rwx,g=rx,o=rx"
+    owner: ubuntu
+    group: ubuntu
+
+- name: Install data retriever script and sql from bitbucket
+  git:
+    clone: yes
+    force: yes
+    depth: 1
+    repo: "https://git.procedurallearning.org/scm/~cgross/simpl-data-retriever.git"
+    dest: /opt/simpl/data_retriever
+
+- name: Set permissions on retriever code directory
+  file:
+    state: directory
+    path: /opt/simpl/data_retriever
+    mode: "u=rwx,g=rx,o=rx"
+
+- name: Set permissions on retriever sql directory
+  file:
+    state: directory
+    path: /opt/simpl/data_retriever/sql
+    mode: "u=rwx,g=rx,o=rx"

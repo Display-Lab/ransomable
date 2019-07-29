@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "Colin A. Gross"
+  description: Base setup and config supporting simpl reports
+  company: SIMPL
+  license: MIT
+  min_ansible_version: 2.7.0
+  version: 1.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - utopic
+  categories:
+    - r

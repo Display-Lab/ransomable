@@ -1,5 +1,8 @@
-roles/
-!roles/simpl.setup/*
+roles/**
+!/roles/simpl.setup
+!/roles/simpl.setup/**
+!/roles/simpl.install
+!/roles/simpl.install/**
 
 .vagrant/
 *.log

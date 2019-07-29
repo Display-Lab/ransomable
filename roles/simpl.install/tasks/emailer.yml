@@ -1,0 +1,22 @@
+---
+- name: Check rbenv is present for emailer user
+  become: yes
+  become_user: ubuntu
+  command: /usr/bin/env bash -lc "rbenv --version"
+  args:
+    warn: no
+  register: rbenv_check
+  ignore_errors: yes
+
+- name: Check Ruby presence failure message
+  fail:
+    msg: "RBENV NEEDS TO BE INSTALLED."
+  when: "rbenv_check.rc != 0"
+
+- name: Install emailer scripts from bitbucket
+  git:
+    clone: yes
+    force: yes
+    depth: 1
+    repo: "https://git.procedurallearning.org/scm/~cgross/emailer.git"
+    dest: /opt/simpl/emailer

@@ -1,0 +1,4 @@
+---
+- include: data-retriever.yml
+- include: reports.yml
+- include: emailer.yml
