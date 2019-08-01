@@ -5,14 +5,13 @@ After=simpl-pipeline.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c 'echo "Data Retriever Done."'
+WorkingDirectory=/var/simpl/data
+ExecStart=/bin/bash /opt/simpl/data_retriever/data_retriever.sh
+User=ubuntu
 
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=simpl-retriever
 
-#RemainAfterExit=true
-
 [Install]
-# Start when pipeline start
 WantedBy=simpl-pipeline.service

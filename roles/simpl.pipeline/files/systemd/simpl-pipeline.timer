@@ -2,7 +2,7 @@
 Description=SIMPL pipeline timer
 
 [Timer]
-OnCalendar=*-*-* *:0/2
+OnCalendar=*-*-1 4:07:00
 Persistent=true
 
 [Install]

@@ -14,7 +14,7 @@
 - name: Create data directory
   file:
     state: directory
-    path: /var/simpl/data_retriever
+    path: /var/simpl/data
     mode: "u=rwx,g=rx,o=rx"
     owner: ubuntu
     group: ubuntu

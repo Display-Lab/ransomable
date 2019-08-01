@@ -7,14 +7,17 @@ Requires=simpl-retriever.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c 'echo "Report Generator Done."'
+WorkingDirectory=/var/simpl/reports
+ExecStart=/opt/simpl/reports/bin/simplreports.sh \
+  --persons  /var/simpl/data/persons.tsv \
+  --programs /var/simpl/data/programs.tsv \
+  --evals    /var/simpl/data/evals.tsv \
+  --specialties /var/simpl/data/specialties.tsv
+User=ubuntu
 
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=simpl-generator
 
-#RemainAfterExit=true
-
 [Install]
-# Start when pipeline starts
 WantedBy=simpl-pipeline.service
