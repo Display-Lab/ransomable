@@ -17,7 +17,7 @@
     - prereqs
   tasks:
     - include_role:
-        name: simpl.setup
+        name: simpl.dependencies
 
 - hosts: reports
   become: true
@@ -106,10 +106,21 @@
       - libjemalloc1
       - libjemalloc-dev
 
-#- hosts: reports
-#  become: yes
-#  tags:
-#    - systemd
-#    - timer
-#  roles:
-#    - role: data.retrieval
+- hosts: reports
+  become: yes
+  tags:
+    - sql
+    - r
+    - ruby
+  roles:
+    - role: simpl.install
+
+- hosts: reports
+  become: yes
+  tags:
+    - sql
+    - r
+    - ruby
+  roles:
+    - role: simpl.pipeline
+
