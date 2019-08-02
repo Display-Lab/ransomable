@@ -1,0 +1,11 @@
+---
+all:
+  hosts:
+    reports:
+      ansible_port: 2222
+      ansible_host: 127.0.0.1
+      ansible_ssh_private_key_file: /home/grosscol/workspace/simpl/vagrant-debug/.vagrant/machines/default/virtualbox/private_key
+      ansible_user: vagrant
+      ansible_ssh_extra_args: '-o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null'
+
+
