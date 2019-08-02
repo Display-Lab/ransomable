@@ -5,11 +5,20 @@
     - core
   remote_user: ubuntu
   gather_facts: no
+  vars:
+    - ansible_python_interpreter: /usr/bin/python3
   pre_tasks:
-  - name: install python
-    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python python-pip)"
-    register: output
-    changed_when: output.stdout != ""
+    - name: install python3
+      raw: bash -c "test -e /usr/bin/python3 || (apt -qqy update && apt install -qqy python3 python-pip)"
+      register: output
+      changed_when: (output.stdout != "") and (output.stdout != "\r\n")
+  tasks:
+    - name: install apt module requirements
+      shell: "dpkg-query --show -f='${Status}' python-apt || apt install -qqy aptitude python-apt"
+      #args:
+      #  executable: /bin/bash
+      register: output
+      changed_when: output.stdout != "install ok installed"
 
 - hosts: reports
   become: true
@@ -25,32 +34,33 @@
     - R
   tasks:
     - include_role:
-        name: oefenweb.r
+        name: andrewrothstein.r
       vars:
-        r_install_dev: true
-        r_install:
-          - r-recommended
-        r_packages:
-          - name: bookdown
-          - name: dplyr
-          - name: DT
-          - name: htmltools
-          - name: ggplot2
-          - name: ggthemes
-          - name: rmarkdown
-          - name: scales
-          - name: stringr
-          - name: tinytex
-          - name: viridis
-          - name: purrr
-          - name: tidyr
-          - name: knitr
-          - name: lubridate
-          - name: RColorBrewer
-          - name: forcats
-          - name: glue
-          - name: gridExtra
-          - name: tidyverse
+        cran_apt_repo: 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+        r_pkgs:
+          - bookdown
+          - dplyr
+          - DT
+          - htmltools
+          - ggplot2
+          - ggthemes
+          - rmarkdown
+          - scales
+          - stringr
+          - tinytex
+          - tools
+          - utils
+          - viridis
+          - purrr
+          - tidyr
+          - knitr
+          - lubridate
+          - RColorBrewer
+          - forcats
+          - glue
+          - gridExtra
+          - stats
+          - tidyverse
 
 - hosts: reports
   become: yes
