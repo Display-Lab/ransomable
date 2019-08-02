@@ -14,28 +14,3 @@
   apt:
     name: "*"
     state: latest
-
-# Copied out of https://github.com/savoirfairelinux/ansible-reboot-if-needed/blob/master/tasks/main.yml
-- name: Check if reboot is required
-  stat:
-    path: /var/run/reboot-required
-  register: reboot_required_file
-
-- name: Rebooting machine
-  shell: sleep 2 && shutdown -r now "Ansible updates triggered"
-  async: 1
-  poll: 0
-  ignore_errors: true
-  when: reboot_required_file.stat.exists
-
-- name: Waiting for the machine to come back
-  local_action: 
-    module: wait_for
-    host: "{{ansible_host}}"
-    port: "{{ansible_port}}" 
-    state: started
-    delay: 20
-    timeout: 300
-  become: no
-  when: reboot_required_file.stat.exists
-

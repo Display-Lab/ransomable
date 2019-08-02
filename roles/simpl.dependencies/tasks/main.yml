@@ -1,3 +1,5 @@
 ---
 - include: package_updates.yml
+- include: boot_check.yml
 - include: packages.yml
+- include: boot_check.yml

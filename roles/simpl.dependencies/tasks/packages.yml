@@ -10,3 +10,5 @@
     - libcurl4-openssl-dev
     - git
     - mysql-client
+    - libxml2-dev
+    - libssl-dev
