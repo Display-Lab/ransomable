@@ -11,12 +11,14 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
     vb.memory = "2048"
+    vb.cpus = 2
 
     # Don't sync folders
     config.vm.synced_folder "", "", disabled: true
   end
   
   config.vm.provision "ansible" do |ansible|
+    compatibility_mode = "2.0"
     ansible.playbook = "playbook.yml"
     ansible.groups = {
       "reports" => ["default"]
