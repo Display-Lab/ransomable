@@ -12,15 +12,9 @@
   ignore_errors: true
   when: reboot_required_file.stat.exists
 
-- name: Waiting for the machine to come back
-  local_action: 
-    module: wait_for
-    host: "{{ansible_host}}"
-    port: "{{ansible_port}}" 
-    state: started
-    delay: 20
+- name: Wait 300 seconds, but only start checking after 60 seconds
+  wait_for_connection:
+    delay: 60
     timeout: 300
-  become: no
   when: reboot_required_file.stat.exists
-
 
